@@ -99,7 +99,7 @@ fun FlightsSearchField(
             trailingIcon = {
                 IconButton(onClick = {
                     flightSearchScreenViewModel.savePhrase("")
-//text = ""
+                    text = ""
 
                 },
                     content = {
