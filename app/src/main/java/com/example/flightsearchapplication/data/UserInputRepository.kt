@@ -26,7 +26,6 @@ class UserInputRepository(
     val searchPhrase: Flow<String> = dataStore.data
         .catch {
             if(it is IOException) {
-                //Log.e(TAG, "Error reading preferences.", it)
                 emit(emptyPreferences())
             } else {
                 throw it

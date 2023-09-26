@@ -1,5 +1,6 @@
-package com.example.flightsearchapplication
+package com.example.flightsearchapplication.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,38 +20,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flightsearchapplication.data.Airport
-import com.example.flightsearchapplication.ui.AirportCard
-import com.example.flightsearchapplication.ui.FlightSearchScreenViewModel
 
 
 @Composable
-fun FlightSearchApp(
-
-) {
-    FlightSearchScreen(
-
-    )
+fun FlightSearchApp() {
+    FlightSearchScreen()
 }
 
 
 @Composable
-fun FlightSearchScreen(
+fun FlightSearchScreen() {
 
-) {
     val flightSearchScreenViewModel: FlightSearchScreenViewModel = viewModel(
         factory = FlightSearchScreenViewModel.Factory
     )
-    Scaffold { innerPaddng ->
+    Scaffold { innerPadding ->
         FlightsSearchField(
             flightSearchScreenViewModel = flightSearchScreenViewModel,
-            paddingValues = innerPaddng,
+            paddingValues = innerPadding,
 
             )
 
@@ -65,20 +59,27 @@ fun FlightsSearchField(
     modifier: Modifier = Modifier,
 
     ) {
+    var firstRun by rememberSaveable {
+        mutableStateOf(true)
+    }
+
+    var text by rememberSaveable {
+        mutableStateOf("")
+    }
 
     val uiState = flightSearchScreenViewModel.uiState.collectAsState().value
+
+    if (firstRun && uiState.searchPhrase.isNotBlank()){
+
+        text = uiState.searchPhrase
+        firstRun = false
+    }
+
     Column(
         modifier = modifier
             .padding(paddingValues = paddingValues)
             .fillMaxSize()
     ) {
-
-        var text by remember { mutableStateOf("") }
-        if (uiState.searchPhrase.isNotEmpty() && text.isEmpty()) {
-            text = uiState.searchPhrase
-            //Log.d("FlightSearchScreen", "current saved phrase is: ${uiState.searchPhrase}")
-        }
-
 
         TextField(
             leadingIcon = {
@@ -90,17 +91,15 @@ fun FlightsSearchField(
             },
             value = text,
             onValueChange =
-            { it ->
-                text = it
-                flightSearchScreenViewModel.savePhrase(text)
-
+            {it -> text = it
+                flightSearchScreenViewModel.savePhrase(it)
             },
             label = { Text("Input airport here") },
             modifier = Modifier.fillMaxWidth(),
             trailingIcon = {
                 IconButton(onClick = {
                     flightSearchScreenViewModel.savePhrase("")
-text = ""
+//text = ""
 
                 },
                     content = {
@@ -135,8 +134,6 @@ fun SearchResultList(
             items = airports,
             key = {airport -> airport.id}
         ){airport ->
-
-
             AirportCard(airport,
                 highlitedPosition(
                     airport = airport,

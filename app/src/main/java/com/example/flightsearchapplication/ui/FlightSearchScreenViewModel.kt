@@ -59,5 +59,5 @@ class FlightSearchScreenViewModel(
 }
 
 data class FlightSearchUiState(
-    val searchPhrase: String = "",
+    val searchPhrase: String = ""
 )
