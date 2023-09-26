@@ -1,6 +1,5 @@
 package com.example.flightsearchapplication.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -12,11 +11,11 @@ import com.example.flightsearchapplication.data.Airport
 import com.example.flightsearchapplication.data.AirportDao
 import com.example.flightsearchapplication.data.UserInputRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 
 class FlightSearchScreenViewModel(
