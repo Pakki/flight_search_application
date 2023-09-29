@@ -29,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -50,14 +49,16 @@ fun FlightSearchScreen() {
     val flightSearchScreenViewModel: FlightSearchScreenViewModel = viewModel(
         factory = FlightSearchScreenViewModel.Factory
     )
-    var currentAirport =
-        remember{mutableStateOf(
-            Airport(
-                name = "",
-                iataCode = "",
-                passengers = 0
+    val currentAirport =
+        remember {
+            mutableStateOf(
+                Airport(
+                    name = "",
+                    iataCode = "",
+                    passengers = 0
+                )
             )
-        )}
+        }
 
     //val selectedNavigationItem by viewModel.navState.collectAsState()
 
@@ -67,49 +68,47 @@ fun FlightSearchScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
-            currentPage = navBackStackEntry?.destination?.route ?: "Flight search",
-            navHostController = navHostController
+                currentPage = navBackStackEntry?.destination?.route ?: "Flight search",
+                navHostController = navHostController
             )
         }
     ) { innerPadding ->
         NavHost(
             navController = navHostController,
             startDestination = "Flight search"
-        ){
-            composable("Flight search"){
+        ) {
+            composable("Flight search") {
                 FlightsSearchField(
-                flightSearchScreenViewModel = flightSearchScreenViewModel,
-                paddingValues = innerPadding,
-                navHostController = navHostController,
+                    flightSearchScreenViewModel = flightSearchScreenViewModel,
+                    paddingValues = innerPadding,
+                    navHostController = navHostController,
                     currentAirport = currentAirport
                 )
             }
-            composable("Airport"){
+            composable("Airport") {
                 AirportScreen(paddingValues = innerPadding, currentAirport = currentAirport.value)
             }
         }
-
-
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar(currentPage: String, navHostController: NavHostController){
+fun TopAppBar(currentPage: String, navHostController: NavHostController) {
 
     androidx.compose.material3.TopAppBar(
         title = {
             Text(text = currentPage)
         },
         navigationIcon = {
-            if(currentPage != "Flight search") {
+            if (currentPage != "Flight search") {
                 IconButton(onClick = {
                     navHostController.navigateUp()
-
                 }) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = currentPage)
+                        contentDescription = currentPage
+                    )
                 }
             }
         }
@@ -121,9 +120,9 @@ fun FlightsSearchField(
     flightSearchScreenViewModel: FlightSearchScreenViewModel,
     paddingValues: PaddingValues,
     modifier: Modifier = Modifier,
-navHostController: NavHostController,
+    navHostController: NavHostController,
     currentAirport: MutableState<Airport>
-    ) {
+) {
 
     var firstRun by rememberSaveable {
         mutableStateOf(true)
@@ -133,7 +132,7 @@ navHostController: NavHostController,
         mutableStateOf("")
     }
 
-    if (firstRun && uiState.searchPhrase.isNotBlank()){
+    if (firstRun && uiState.searchPhrase.isNotBlank()) {
         text = uiState.searchPhrase
         firstRun = false
     }
@@ -154,7 +153,8 @@ navHostController: NavHostController,
             },
             value = text,
             onValueChange =
-            {it -> text = it
+            { it ->
+                text = it
                 flightSearchScreenViewModel.savePhrase(it)
             },
             label = { Text("Input airport here") },
@@ -163,7 +163,7 @@ navHostController: NavHostController,
                 IconButton(onClick = {
                     flightSearchScreenViewModel.savePhrase("")
                     text = ""
-                                     },
+                },
                     content = {
                         Icon(
                             imageVector = Icons.Filled.Clear,
@@ -197,12 +197,14 @@ fun SearchResultList(
     LazyColumn(modifier = modifier) {
         items(
             items = airports,
-            key = {airport -> airport.id}
-        ){airport ->
-            AirportCard(airport,
+            key = { airport -> airport.id }
+        ) { airport ->
+            AirportCard(
+                airport,
                 highlitedPosition(
                     airport = airport,
-                    searchPhrase = searchPhrase),
+                    searchPhrase = searchPhrase
+                ),
                 navHostController,
                 currentAirport = currentAirport
             )
@@ -210,10 +212,10 @@ fun SearchResultList(
     }
 }
 
-fun highlitedPosition(airport: Airport, searchPhrase: String): List<Int>{
+fun highlitedPosition(airport: Airport, searchPhrase: String): List<Int> {
     val first = "${airport.iataCode} ${airport.name}".indexOf(searchPhrase)
-    if (first < 0){
-        return listOf(0,0)
+    if (first < 0) {
+        return listOf(0, 0)
     }
     return listOf(first, first + searchPhrase.length)
 }

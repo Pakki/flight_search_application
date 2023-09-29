@@ -10,9 +10,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,7 +27,7 @@ import com.example.flightsearchapplication.data.Airport
 fun AirportScreen(
     currentAirport: Airport,
     paddingValues: PaddingValues
-){
+) {
     val airportScreenViewModel: AirportScreenViewModel = viewModel(
         factory = AirportScreenViewModel.Factory
     )
@@ -45,20 +43,18 @@ fun AirportScreen(
         LazyColumn(modifier = Modifier) {
             items(
                 items = airports,
-                key = {airport -> airport.id}
-            ){airport ->
-
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        IconButton(onClick = {}) {
-                            Icon(
-                                imageVector = Icons.Outlined.FavoriteBorder,
-                                contentDescription = "favorite"
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(5.dp))
-                        Text(text = "${airport.iataCode} ${airport.name}")
+                key = { airport -> airport.id }
+            ) { airport ->
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.Outlined.FavoriteBorder,
+                            contentDescription = "favorite"
+                        )
                     }
-
+                    Spacer(modifier = Modifier.width(5.dp))
+                    Text(text = "${airport.iataCode} ${airport.name}")
+                }
             }
         }
     }

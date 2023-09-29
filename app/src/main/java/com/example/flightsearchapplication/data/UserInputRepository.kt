@@ -34,6 +34,4 @@ class UserInputRepository(
         .map { preferences ->
             preferences[SEARCH_PHRASE] ?: ""
         }
-
-
 }

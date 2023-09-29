@@ -1,9 +1,5 @@
 package com.example.flightsearchapplication.ui
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -45,8 +41,7 @@ class FlightSearchScreenViewModel(
     }
 
     fun getAirportsLike(searchPhrase: String): Flow<List<Airport>> =
-        airportDao.getAirportsLike("%"+searchPhrase+"%")
-
+        airportDao.getAirportsLike("%" + searchPhrase + "%")
 
 
     companion object {

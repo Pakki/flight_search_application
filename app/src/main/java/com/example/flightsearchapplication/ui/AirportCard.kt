@@ -11,17 +11,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.Navigator
-import androidx.navigation.compose.NavHost
 import com.example.flightsearchapplication.data.Airport
-import com.example.flightsearchapplication.ui.theme.FlightSearchApplicationTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

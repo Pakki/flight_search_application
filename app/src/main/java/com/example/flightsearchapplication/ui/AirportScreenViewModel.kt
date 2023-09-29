@@ -7,18 +7,18 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.flightsearchapplication.FlightSearchApplication
 import com.example.flightsearchapplication.data.Airport
 import com.example.flightsearchapplication.data.AirportDao
-import com.example.flightsearchapplication.data.FavoriteDao
 import kotlinx.coroutines.flow.Flow
 
 class AirportScreenViewModel(
     private val airportDao: AirportDao,
 
-) : ViewModel() {
+    ) : ViewModel() {
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val application = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as FlightSearchApplication)
+                val application =
+                    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as FlightSearchApplication)
                 AirportScreenViewModel(
                     application.database.airportDao()
 
