@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
@@ -16,6 +17,9 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.Navigator
+import androidx.navigation.compose.NavHost
 import com.example.flightsearchapplication.data.Airport
 import com.example.flightsearchapplication.ui.theme.FlightSearchApplicationTheme
 
@@ -24,15 +28,20 @@ import com.example.flightsearchapplication.ui.theme.FlightSearchApplicationTheme
 fun AirportCard(
     airport: Airport,
     highlitedPosition: List<Int>,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
+
+    navHostController: NavHostController,
+    modifier: Modifier = Modifier,
+    currentAirport: MutableState<Airport>
 ) {
     Card(
         shape = ShapeDefaults.ExtraSmall,
         modifier = modifier
             .fillMaxWidth()
             .padding(2.dp),
-        onClick = { onClick }
+        onClick = {
+            currentAirport.value = airport
+            navHostController.navigate(route = "Airport")
+        }
     ) {
         Row {
             Text(
@@ -55,6 +64,7 @@ fun AirportCard(
     }
 }
 
+/*
 @Preview
 @Composable
 fun AirportCardPreview() {
@@ -67,8 +77,9 @@ fun AirportCardPreview() {
                 passengers = 44
             ),
             listOf(6, 3),
-            {}
+
         )
     }
 
 }
+*/

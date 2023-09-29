@@ -16,4 +16,6 @@ interface AirportDao {
 
     @Query("select * from airport where id != :airportId")
     fun getRelatedAirports(airportId: Int): Flow<List<Airport>>
+
+
 }
