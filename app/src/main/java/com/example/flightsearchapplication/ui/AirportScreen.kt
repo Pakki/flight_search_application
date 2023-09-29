@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -33,7 +34,7 @@ fun AirportScreen(
     )
     val airports =
         airportScreenViewModel
-            .getRelatedAirports(currentAirport.id)
+            .getRelatedAirports(currentAirport.iataCode)
             .collectAsState(emptyList()).value
 
     Column(
@@ -46,9 +47,16 @@ fun AirportScreen(
                 key = { airport -> airport.id }
             ) { airport ->
                 Row(modifier = Modifier.fillMaxWidth()) {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = {
+                        airportScreenViewModel.addFavorite(currentAirport.iataCode, airport.iataCode)
+                    }) {
                         Icon(
-                            imageVector = Icons.Outlined.FavoriteBorder,
+                            imageVector = if (true){
+                                Icons.Outlined.Favorite
+                            } else {
+                                Icons.Outlined.FavoriteBorder
+                            }
+                            ,
                             contentDescription = "favorite"
                         )
                     }

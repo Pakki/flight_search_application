@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.jetbrains.annotations.NotNull
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 
 @Entity(tableName = "airport")
 data class Airport(
@@ -19,4 +20,5 @@ data class Airport(
 
     @NotNull
     val passengers: Int,
+
 )

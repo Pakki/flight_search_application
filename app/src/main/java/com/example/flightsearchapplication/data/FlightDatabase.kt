@@ -13,6 +13,7 @@ import androidx.room.RoomDatabase
 )
 abstract class FlightDatabase: RoomDatabase() {
     abstract fun airportDao(): AirportDao
+    abstract fun favoriteDao(): FavoriteDao
 
     companion object{
         private var Instance: FlightDatabase? = null
