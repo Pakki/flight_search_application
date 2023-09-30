@@ -14,6 +14,10 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -27,6 +31,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -35,6 +40,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.flightsearchapplication.data.Airport
+import com.example.flightsearchapplication.data.NavigationItem
+import com.example.flightsearchapplication.navigation.Screen
 
 
 @Composable
@@ -44,7 +51,7 @@ fun FlightSearchApp() {
 
 
 @Composable
-fun FlightSearchScreen() {
+fun FlightSearchScreen(modifier: Modifier = Modifier) {
 
     val flightSearchScreenViewModel: FlightSearchScreenViewModel = viewModel(
         factory = FlightSearchScreenViewModel.Factory
@@ -71,13 +78,51 @@ fun FlightSearchScreen() {
                 currentPage = navBackStackEntry?.destination?.route ?: "Flight search",
                 navHostController = navHostController
             )
+        },
+
+                bottomBar = {
+            NavigationBar(modifier = modifier) {
+                val items = listOf<NavigationItem>(
+                    NavigationItem.Home,
+                    NavigationItem.Favorite
+                )
+                items.forEach { navigationItem ->
+                    NavigationBarItem(
+                        selected = navigationItem.screen.route == navBackStackEntry?.destination?.route,
+                        onClick = {
+                            navHostController.navigate(navigationItem.screen.route) {
+                                popUpTo(Screen.Home.route) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = navigationItem.icon,
+                                contentDescription = stringResource(id = navigationItem.title)
+                            )
+                        },
+                        label = {
+                            Text(text = stringResource(id = navigationItem.title))
+                        },
+                        colors = NavigationBarItemDefaults.colors(
+                            indicatorColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                            selectedIconColor = MaterialTheme.colorScheme.inversePrimary,
+                            selectedTextColor = MaterialTheme.colorScheme.onPrimary
+                        )
+                    )
+                }
+            }
         }
     ) { innerPadding ->
         NavHost(
             navController = navHostController,
-            startDestination = "Flight search"
+            startDestination = Screen.Home.route
         ) {
-            composable("Flight search") {
+            composable(Screen.Home.route) {
                 FlightsSearchField(
                     flightSearchScreenViewModel = flightSearchScreenViewModel,
                     paddingValues = innerPadding,
@@ -87,6 +132,9 @@ fun FlightSearchScreen() {
             }
             composable("Airport") {
                 AirportScreen(paddingValues = innerPadding, currentAirport = currentAirport.value)
+            }
+            composable(Screen.Favorities.route) {
+                FavoriteScreen(paddingValues = innerPadding)
             }
         }
     }

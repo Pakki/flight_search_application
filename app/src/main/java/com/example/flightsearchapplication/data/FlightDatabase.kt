@@ -15,6 +15,8 @@ abstract class FlightDatabase: RoomDatabase() {
     abstract fun airportDao(): AirportDao
     abstract fun favoriteDao(): FavoriteDao
 
+    abstract fun favoriteAirportDao(): FavoriteAirportDao
+
     companion object{
         private var Instance: FlightDatabase? = null
 
