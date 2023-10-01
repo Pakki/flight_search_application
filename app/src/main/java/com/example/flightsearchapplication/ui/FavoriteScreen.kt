@@ -24,6 +24,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun FavoriteScreen(
     paddingValues: PaddingValues,
     modifier: Modifier = Modifier){
+
     val favoriteScreenViewModel: FavoriteScreenViewModel = viewModel(
         factory = FavoriteScreenViewModel.Factory
     )
@@ -39,7 +40,7 @@ fun FavoriteScreen(
         ){airport ->
             Row(modifier = Modifier.fillMaxWidth()) {
                 IconButton(onClick = {
-                    //favoriteScreenViewModel.addFavorite(currentAirport.iataCode, airport.iataCode)
+                    favoriteScreenViewModel.deleteFavorite(airport.id, airport.departureCode, airport.destinationCode)
                 }) {
                     Icon(
                         imageVector = if (true){

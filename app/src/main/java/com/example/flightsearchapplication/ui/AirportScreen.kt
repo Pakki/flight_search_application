@@ -18,10 +18,13 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flightsearchapplication.data.Airport
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,12 +37,13 @@ fun AirportScreen(
     )
     val airports =
         airportScreenViewModel
-            .getRelatedAirports(currentAirport.iataCode)
+            .getRelatedAirports(currentAirport.id, currentAirport.iataCode)
             .collectAsState(emptyList()).value
-
+    val coroutineScope = rememberCoroutineScope()
     Column(
         modifier = Modifier.padding(paddingValues)
     ) {
+
         Text(text = currentAirport.name)
         LazyColumn(modifier = Modifier) {
             items(
@@ -48,10 +52,24 @@ fun AirportScreen(
             ) { airport ->
                 Row(modifier = Modifier.fillMaxWidth()) {
                     IconButton(onClick = {
-                        airportScreenViewModel.addFavorite(currentAirport.iataCode, airport.iataCode)
+                        coroutineScope.launch {
+                            if(airport.isFavorite){
+                                airportScreenViewModel.deleteFavorite(
+                                    favoriteId = airport.favoriteId,
+                                    departureCode = currentAirport.iataCode,
+                                    destinationCode = airport.iataCode
+                                )
+                            } else {
+                                airportScreenViewModel.addFavorite(
+                                    currentAirport.iataCode,
+                                    airport.iataCode
+                                )
+                            }
+                            }
+
                     }) {
                         Icon(
-                            imageVector = if (true){
+                            imageVector = if (airport.isFavorite){
                                 Icons.Outlined.Favorite
                             } else {
                                 Icons.Outlined.FavoriteBorder

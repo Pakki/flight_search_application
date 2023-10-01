@@ -9,6 +9,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.flightsearchapplication.FlightSearchApplication
 import com.example.flightsearchapplication.data.Airport
 import com.example.flightsearchapplication.data.AirportDao
+import com.example.flightsearchapplication.data.NavigationItem
 import com.example.flightsearchapplication.data.UserInputRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -58,5 +59,6 @@ class FlightSearchScreenViewModel(
 }
 
 data class FlightSearchUiState(
-    val searchPhrase: String = ""
+    val searchPhrase: String = "",
+    val selectedNavigationItem: NavigationItem = NavigationItem.Home
 )

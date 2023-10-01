@@ -75,7 +75,7 @@ fun FlightSearchScreen(modifier: Modifier = Modifier) {
     Scaffold(
         topBar = {
             TopAppBar(
-                currentPage = navBackStackEntry?.destination?.route ?: "Flight search",
+                currentPage = navBackStackEntry?.destination?.route ?: "Home",
                 navHostController = navHostController
             )
         },
@@ -149,7 +149,7 @@ fun TopAppBar(currentPage: String, navHostController: NavHostController) {
             Text(text = currentPage)
         },
         navigationIcon = {
-            if (currentPage != "Flight search") {
+            if (currentPage != "Home") {
                 IconButton(onClick = {
                     navHostController.navigateUp()
                 }) {
