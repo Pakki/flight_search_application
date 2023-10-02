@@ -2,8 +2,11 @@ package com.example.flightsearchapplication.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -34,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -49,7 +54,6 @@ import com.example.flightsearchapplication.navigation.Screen
 fun FlightSearchApp() {
     FlightSearchScreen()
 }
-
 
 @Composable
 fun FlightSearchScreen(modifier: Modifier = Modifier) {
@@ -81,7 +85,7 @@ fun FlightSearchScreen(modifier: Modifier = Modifier) {
             )
         },
 
-                bottomBar = {
+        bottomBar = {
             NavigationBar(modifier = modifier) {
                 val items = listOf<NavigationItem>(
                     NavigationItem.Home,
@@ -194,37 +198,40 @@ fun FlightsSearchField(
             .padding(paddingValues = paddingValues)
             .fillMaxSize()
     ) {
-
-        TextField(
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Filled.Search,
-                    contentDescription = "Icon",
-                    tint = Color.White
-                )
-            },
-            value = text,
-            onValueChange =
-            { it ->
-                text = it
-                flightSearchScreenViewModel.savePhrase(it)
-            },
-            label = { Text("Input airport here") },
-            modifier = Modifier.fillMaxWidth(),
-            trailingIcon = {
-                IconButton(onClick = {
-                    flightSearchScreenViewModel.savePhrase("")
-                    text = ""
+        Spacer(modifier = Modifier.height(40.dp))
+        Card(modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)) {
+            TextField(
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Search,
+                        contentDescription = "Icon",
+                        tint = Color.White
+                    )
                 },
-                    content = {
-                        Icon(
-                            imageVector = Icons.Filled.Clear,
-                            contentDescription = "Clear search"
-                        )
-                    }
-                )
-            }
-        )
+                value = text,
+                onValueChange =
+                { it ->
+                    text = it
+                    flightSearchScreenViewModel.savePhrase(it)
+                },
+                label = { Text("Input airport here") },
+                modifier = Modifier.fillMaxWidth(),
+                trailingIcon = {
+                    IconButton(onClick = {
+                        flightSearchScreenViewModel.savePhrase("")
+                        text = ""
+                    },
+                        content = {
+                            Icon(
+                                imageVector = Icons.Filled.Clear,
+                                contentDescription = "Clear search"
+                            )
+                        }
+                    )
+                }
+            )
+        }
+
         val airports =
             flightSearchScreenViewModel.getAirportsLike(uiState.searchPhrase).collectAsState(
                 emptyList()
