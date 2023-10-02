@@ -2,5 +2,5 @@
     <string name="app_name">FlightSearchApplication</string>
     <string name="navigation_title_home">Flight search</string>
     <string name="navigation_title_favority">Favority flights</string>
-    <string name="navigation_title_airport">Airport</string>
+    <string name="navigation_title_airport">Flight from</string>
 </resources>

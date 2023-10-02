@@ -20,10 +20,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flightsearchapplication.data.Airport
-import kotlinx.coroutines.coroutineScope
+import com.example.flightsearchapplication.ui.theme.FlightSearchApplicationTheme
+
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -53,7 +55,7 @@ fun AirportScreen(
                 Row(modifier = Modifier.fillMaxWidth()) {
                     IconButton(onClick = {
                         coroutineScope.launch {
-                            if(airport.isFavorite){
+                            if (airport.isFavorite) {
                                 airportScreenViewModel.deleteFavorite(
                                     favoriteId = airport.favoriteId,
                                     departureCode = currentAirport.iataCode,
@@ -65,16 +67,14 @@ fun AirportScreen(
                                     airport.iataCode
                                 )
                             }
-                            }
-
+                        }
                     }) {
                         Icon(
-                            imageVector = if (airport.isFavorite){
+                            imageVector = if (airport.isFavorite) {
                                 Icons.Outlined.Favorite
                             } else {
                                 Icons.Outlined.FavoriteBorder
-                            }
-                            ,
+                            },
                             contentDescription = "favorite"
                         )
                     }
@@ -83,5 +83,21 @@ fun AirportScreen(
                 }
             }
         }
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun AirportScreenPreview(){
+    FlightSearchApplicationTheme {
+        AirportScreen(
+            currentAirport = Airport(
+                iataCode = "CDG",
+                name = "Aéroport de Paris-Charles de Gaulle",
+                passengers = 100
+            ),
+            paddingValues = PaddingValues()
+        )
     }
 }
