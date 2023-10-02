@@ -12,8 +12,10 @@ import com.example.flightsearchapplication.data.AirportDao
 import com.example.flightsearchapplication.data.NavigationItem
 import com.example.flightsearchapplication.data.UserInputRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -33,6 +35,14 @@ class FlightSearchScreenViewModel(
                 started = SharingStarted.WhileSubscribed(5_000),
                 initialValue = FlightSearchUiState()
             )
+
+    //navigation
+    private val _navState = MutableStateFlow<NavigationItem>(NavigationItem.Home)
+    val navState: StateFlow<NavigationItem> = _navState.asStateFlow()
+
+    fun selectNavItem(navigationItem: NavigationItem){
+        _navState.value = navigationItem
+    }
 
     fun savePhrase(searchPhrase: String) {
 

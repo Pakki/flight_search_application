@@ -29,6 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -67,7 +68,7 @@ fun FlightSearchScreen(modifier: Modifier = Modifier) {
             )
         }
 
-    //val selectedNavigationItem by viewModel.navState.collectAsState()
+    val selectedNavigationItem by flightSearchScreenViewModel.navState.collectAsState()
 
     val navHostController = rememberNavController()
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
@@ -75,7 +76,7 @@ fun FlightSearchScreen(modifier: Modifier = Modifier) {
     Scaffold(
         topBar = {
             TopAppBar(
-                currentPage = navBackStackEntry?.destination?.route ?: "Home",
+                currentPage = stringResource(selectedNavigationItem.title),
                 navHostController = navHostController
             )
         },
@@ -97,7 +98,7 @@ fun FlightSearchScreen(modifier: Modifier = Modifier) {
                                 launchSingleTop = true
                                 restoreState = true
                             }
-
+                            //flightSearchScreenViewModel.selectNavItem(navigationItem)
                         },
                         icon = {
                             Icon(
@@ -129,12 +130,15 @@ fun FlightSearchScreen(modifier: Modifier = Modifier) {
                     navHostController = navHostController,
                     currentAirport = currentAirport
                 )
+                flightSearchScreenViewModel.selectNavItem(NavigationItem.Home)
             }
             composable("Airport") {
                 AirportScreen(paddingValues = innerPadding, currentAirport = currentAirport.value)
+                flightSearchScreenViewModel.selectNavItem(NavigationItem.Airport)
             }
             composable(Screen.Favorities.route) {
                 FavoriteScreen(paddingValues = innerPadding)
+                flightSearchScreenViewModel.selectNavItem(NavigationItem.Favorite)
             }
         }
     }
@@ -149,7 +153,7 @@ fun TopAppBar(currentPage: String, navHostController: NavHostController) {
             Text(text = currentPage)
         },
         navigationIcon = {
-            if (currentPage != "Home") {
+            if (currentPage != stringResource(NavigationItem.Home.title)) {
                 IconButton(onClick = {
                     navHostController.navigateUp()
                 }) {
