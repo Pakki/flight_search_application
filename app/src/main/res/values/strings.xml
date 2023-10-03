@@ -3,4 +3,6 @@
     <string name="navigation_title_home">Flight search</string>
     <string name="navigation_title_favority">Favority flights</string>
     <string name="navigation_title_airport">Flight from</string>
+    <string name="search_field_label">Input airport name or IATA here</string>
+    <string name="search_field_clear_button">Clear search field</string>
 </resources>

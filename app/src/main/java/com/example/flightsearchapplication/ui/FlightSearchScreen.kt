@@ -1,9 +1,9 @@
 package com.example.flightsearchapplication.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,6 +15,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,6 +26,8 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
@@ -33,7 +36,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -45,6 +47,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.flightsearchapplication.R
 import com.example.flightsearchapplication.data.Airport
 import com.example.flightsearchapplication.data.NavigationItem
 import com.example.flightsearchapplication.navigation.Screen
@@ -102,7 +105,6 @@ fun FlightSearchScreen(modifier: Modifier = Modifier) {
                                 launchSingleTop = true
                                 restoreState = true
                             }
-                            //flightSearchScreenViewModel.selectNavItem(navigationItem)
                         },
                         icon = {
                             Icon(
@@ -199,13 +201,17 @@ fun FlightsSearchField(
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(40.dp))
-        Card(modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)) {
+        Card(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp, vertical = 8.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+            border = BorderStroke(2.dp, color = MaterialTheme.colorScheme.primary)
+        ) {
             TextField(
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Filled.Search,
                         contentDescription = "Icon",
-                        tint = Color.White
+                        tint = MaterialTheme.colorScheme.onBackground
                     )
                 },
                 value = text,
@@ -214,7 +220,7 @@ fun FlightsSearchField(
                     text = it
                     flightSearchScreenViewModel.savePhrase(it)
                 },
-                label = { Text("Input airport here") },
+                label = { Text(text = stringResource(R.string.search_field_label)) },
                 modifier = Modifier.fillMaxWidth(),
                 trailingIcon = {
                     IconButton(onClick = {
@@ -224,11 +230,17 @@ fun FlightsSearchField(
                         content = {
                             Icon(
                                 imageVector = Icons.Filled.Clear,
-                                contentDescription = "Clear search"
+                                contentDescription = stringResource(R.string.search_field_clear_button)
                             )
                         }
                     )
-                }
+                },
+                colors =
+                TextFieldDefaults.colors(
+                    focusedContainerColor = MaterialTheme.colorScheme.background,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.background,
+
+                    ),
             )
         }
 
@@ -239,7 +251,7 @@ fun FlightsSearchField(
         SearchResultList(
             airports = airports.value,
             navHostController = navHostController,
-            uiState.searchPhrase,
+            searchPhrase = uiState.searchPhrase,
             currentAirport = currentAirport
         )
     }
