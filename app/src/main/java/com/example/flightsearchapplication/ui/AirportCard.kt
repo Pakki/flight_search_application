@@ -1,5 +1,6 @@
 package com.example.flightsearchapplication.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,6 +14,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -28,7 +30,7 @@ fun AirportCard(
     modifier: Modifier = Modifier,
     currentAirport: MutableState<Airport>
 ) {
-    Card(
+    /*Card(
         shape = ShapeDefaults.ExtraSmall,
         modifier = modifier
             .fillMaxWidth()
@@ -38,7 +40,13 @@ fun AirportCard(
             navHostController.navigate(route = "Airport")
         }
     ) {
-        Row {
+
+     */
+        Row(modifier = modifier
+            .clickable {
+                currentAirport.value = airport
+                navHostController.navigate(route = "Airport")
+        }) {
             Text(
                 text =
                 AnnotatedString(
@@ -53,11 +61,15 @@ fun AirportCard(
                             highlitedPosition[0], highlitedPosition[1]
                         )
                     ),
-                )
+                ),
+                modifier = Modifier
+                    .padding(5.dp)
+                    .fillMaxWidth(),
+                style = TextStyle(background = MaterialTheme.colorScheme.background)
             )
         }
     }
-}
+//}
 
 /*
 @Preview

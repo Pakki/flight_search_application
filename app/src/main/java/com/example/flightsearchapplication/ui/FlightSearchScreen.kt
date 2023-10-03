@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -118,7 +119,7 @@ fun FlightSearchScreen(modifier: Modifier = Modifier) {
                         colors = NavigationBarItemDefaults.colors(
                             indicatorColor = MaterialTheme.colorScheme.onPrimaryContainer,
                             selectedIconColor = MaterialTheme.colorScheme.inversePrimary,
-                            selectedTextColor = MaterialTheme.colorScheme.onPrimary
+                            selectedTextColor = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     )
                 }
@@ -265,36 +266,40 @@ fun SearchResultList(
     modifier: Modifier = Modifier,
     currentAirport: MutableState<Airport>
 ) {
-    LazyColumn(modifier = modifier) {
-        items(
-            items = airports,
-            key = { airport -> airport.id }
-        ) { airport ->
-            AirportCard(
-                airport,
-                highlitedPosition(
+    Card(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 10.dp, vertical = 5.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+        border = BorderStroke(2.dp, color = MaterialTheme.colorScheme.primary)
+    ) {
+        LazyColumn(modifier = modifier) {
+            items(
+                items = airports,
+                key = { airport -> airport.id }
+            ) { airport ->
+                AirportCard(
                     airport = airport,
-                    searchPhrase = searchPhrase
-                ),
-                navHostController,
-                currentAirport = currentAirport
-            )
+                    highlitedPosition =  highlitedPosition(
+                        airport = airport,
+                        searchPhrase = searchPhrase
+                    ),
+                    navHostController = navHostController,
+                    currentAirport = currentAirport,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 5.dp, vertical = 8.dp)
+                )
+                Divider(color = MaterialTheme.colorScheme.onBackground, thickness = 2.dp)
+            }
         }
     }
 }
 
 fun highlitedPosition(airport: Airport, searchPhrase: String): List<Int> {
-    val first = "${airport.iataCode} ${airport.name}".indexOf(searchPhrase)
+    val first = "${airport.iataCode} ${airport.name}".lowercase().indexOf(searchPhrase)
     if (first < 0) {
         return listOf(0, 0)
     }
     return listOf(first, first + searchPhrase.length)
-}
-
-@Preview
-@Composable
-fun FlightSearchScreenPreview() {
-    FlightSearchScreen(
-
-    )
 }
