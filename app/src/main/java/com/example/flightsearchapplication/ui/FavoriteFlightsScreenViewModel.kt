@@ -13,7 +13,7 @@ import com.example.flightsearchapplication.data.FavoriteDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class FavoriteScreenViewModel(
+class FavoriteFlightsScreenViewModel(
     private val favoriteAirportDao: FavoriteAirportDao,
     private val favoriteDao: FavoriteDao
     ): ViewModel() {
@@ -23,7 +23,7 @@ class FavoriteScreenViewModel(
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val application = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as FlightSearchApplication)
-                FavoriteScreenViewModel(
+                FavoriteFlightsScreenViewModel(
                     application.database.favoriteAirportDao(),
                     application.database.favoriteDao()
                 )

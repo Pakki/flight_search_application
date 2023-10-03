@@ -17,7 +17,7 @@ import androidx.navigation.NavHostController
 import com.example.flightsearchapplication.data.Airport
 
 @Composable
-fun AirportCard(
+fun AirportRow(
     airport: Airport,
     highlitedPosition: List<Int>,
 
