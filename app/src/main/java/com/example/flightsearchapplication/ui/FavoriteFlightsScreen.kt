@@ -1,6 +1,7 @@
 package com.example.flightsearchapplication.ui
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -37,41 +38,43 @@ fun FavoriteScreen(
     val favoriteAirports = favoriteFlightsScreenViewModel
         .getFavoriteAirport()
         .collectAsState(emptyList()).value
-    Card(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 10.dp, vertical = 5.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-        border = BorderStroke(2.dp, color = MaterialTheme.colorScheme.primary)
-    ) {
-        LazyColumn(
-            modifier = Modifier.padding(paddingValues)
+    Column(modifier = modifier.padding(paddingValues)) {
+        Card(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 10.dp, vertical = 5.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+            border = BorderStroke(2.dp, color = MaterialTheme.colorScheme.primary)
         ) {
-            items(
-                items = favoriteAirports,
-                key = { airport -> airport.id }
-            ) { airport ->
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    IconButton(onClick = {
-                        favoriteFlightsScreenViewModel.deleteFavorite(
-                            airport.id,
-                            airport.departureCode,
-                            airport.destinationCode
-                        )
-                    }) {
-                        Icon(
-                            imageVector = if (true) {
-                                Icons.Outlined.Favorite
-                            } else {
-                                Icons.Outlined.FavoriteBorder
-                            },
-                            contentDescription = "favorite"
-                        )
+            LazyColumn(
+                modifier = Modifier.padding(paddingValues)
+            ) {
+                items(
+                    items = favoriteAirports,
+                    key = { airport -> airport.id }
+                ) { airport ->
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        IconButton(onClick = {
+                            favoriteFlightsScreenViewModel.deleteFavorite(
+                                airport.id,
+                                airport.departureCode,
+                                airport.destinationCode
+                            )
+                        }) {
+                            Icon(
+                                imageVector = if (true) {
+                                    Icons.Outlined.Favorite
+                                } else {
+                                    Icons.Outlined.FavoriteBorder
+                                },
+                                contentDescription = "favorite"
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Text(text = "${airport.departureCode} ${airport.departureName} -> ${airport.destinationCode} ${airport.destinationName}")
                     }
-                    Spacer(modifier = Modifier.width(5.dp))
-                    Text(text = "${airport.departureCode} ${airport.departureName} -> ${airport.destinationCode} ${airport.destinationName}")
+                    Divider(color = MaterialTheme.colorScheme.onBackground, thickness = 2.dp)
                 }
-                Divider(color = MaterialTheme.colorScheme.onBackground, thickness = 2.dp)
             }
         }
     }

@@ -25,7 +25,7 @@ fun AirportsList(
     currentAirport: MutableState<Airport>
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 10.dp, vertical = 5.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),

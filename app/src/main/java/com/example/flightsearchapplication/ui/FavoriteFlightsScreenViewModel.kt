@@ -7,7 +7,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.flightsearchapplication.FlightSearchApplication
 import com.example.flightsearchapplication.data.Favorite
-import com.example.flightsearchapplication.data.FavoriteAirport
+import com.example.flightsearchapplication.data.FavoriteFlight
 import com.example.flightsearchapplication.data.FavoriteAirportDao
 import com.example.flightsearchapplication.data.FavoriteDao
 import kotlinx.coroutines.flow.Flow
@@ -31,7 +31,7 @@ class FavoriteFlightsScreenViewModel(
         }
     }
 
-    fun getFavoriteAirport(): Flow<List<FavoriteAirport>> =
+    fun getFavoriteAirport(): Flow<List<FavoriteFlight>> =
         favoriteAirportDao.getFavoriteAirport()
 
     fun deleteFavorite(id: Int, departureCode: String, destinationCode: String){

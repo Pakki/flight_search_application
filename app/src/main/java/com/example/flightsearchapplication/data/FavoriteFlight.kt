@@ -1,6 +1,6 @@
 package com.example.flightsearchapplication.data
 
-data class FavoriteAirport(
+data class FavoriteFlight(
     val id: Int,
     val departureCode: String,
     val departureName: String,

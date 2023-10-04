@@ -17,5 +17,5 @@ interface FavoriteAirportDao {
             " on favorite.departure_code = airport_dep.iata_code " +
             " join airport as airport_dest " +
             " on favorite.destination_code = airport_dest.iata_code")
-    fun getFavoriteAirport(): Flow<List<FavoriteAirport>>
+    fun getFavoriteAirport(): Flow<List<FavoriteFlight>>
 }
