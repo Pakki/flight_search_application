@@ -18,10 +18,10 @@ import com.example.flightsearchapplication.data.Airport
 
 @Composable
 fun AirportsList(
+    modifier: Modifier = Modifier,
     airports: List<Airport>,
     navHostController: NavHostController,
     searchPhrase: String  = "",
-    modifier: Modifier = Modifier,
     currentAirport: MutableState<Airport>
 ) {
     Card(

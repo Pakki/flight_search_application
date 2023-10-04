@@ -1,11 +1,13 @@
 package com.example.flightsearchapplication.ui
 
+import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.flightsearchapplication.FlightSearchApplication
+import com.example.flightsearchapplication.data.Airport
 import com.example.flightsearchapplication.data.Favorite
 import com.example.flightsearchapplication.data.FavoriteFlight
 import com.example.flightsearchapplication.data.FavoriteAirportDao

@@ -8,15 +8,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -57,7 +54,10 @@ fun FlightSearchApp() {
 }
 
 @Composable
-fun FlightSearchScreen(modifier: Modifier = Modifier) {
+fun FlightSearchScreen(
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController = rememberNavController(),
+) {
 
     val flightSearchScreenViewModel: FlightSearchScreenViewModel = viewModel(
         factory = FlightSearchScreenViewModel.Factory
@@ -74,8 +74,6 @@ fun FlightSearchScreen(modifier: Modifier = Modifier) {
         }
 
     val selectedNavigationItem by flightSearchScreenViewModel.navState.collectAsState()
-
-    val navHostController = rememberNavController()
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
 
     Scaffold(
@@ -88,7 +86,7 @@ fun FlightSearchScreen(modifier: Modifier = Modifier) {
 
         bottomBar = {
             NavigationBar(modifier = modifier) {
-                val items = listOf<NavigationItem>(
+                val items = listOf(
                     NavigationItem.Home,
                     NavigationItem.Favorite
                 )
@@ -200,7 +198,9 @@ fun FlightsSearchField(
     ) {
         Spacer(modifier = Modifier.height(40.dp))
         Card(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp, vertical = 8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 10.dp, vertical = 8.dp),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
             border = BorderStroke(2.dp, color = MaterialTheme.colorScheme.primary)
         ) {
@@ -214,7 +214,7 @@ fun FlightsSearchField(
                 },
                 value = text,
                 onValueChange =
-                { it ->
+                {
                     text = it
                     flightSearchScreenViewModel.savePhrase(it)
                 },

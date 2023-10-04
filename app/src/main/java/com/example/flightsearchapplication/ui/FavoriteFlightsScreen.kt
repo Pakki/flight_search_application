@@ -24,8 +24,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.flightsearchapplication.R
 
 @Composable
 fun FavoriteScreen(
@@ -62,12 +64,8 @@ fun FavoriteScreen(
                             )
                         }) {
                             Icon(
-                                imageVector = if (true) {
-                                    Icons.Outlined.Favorite
-                                } else {
-                                    Icons.Outlined.FavoriteBorder
-                                },
-                                contentDescription = "favorite"
+                                imageVector = Icons.Outlined.Favorite,
+                                contentDescription = stringResource(id = R.string.favorite_button)
                             )
                         }
                         Spacer(modifier = Modifier.width(5.dp))

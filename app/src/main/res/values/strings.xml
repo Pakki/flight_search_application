@@ -5,4 +5,7 @@
     <string name="navigation_title_airport">Flight from</string>
     <string name="search_field_label">Input airport name or IATA here</string>
     <string name="search_field_clear_button">Clear search field</string>
+    <string name="back_button">Back</string>
+    <string name="favorite_button">Favorite</string>
+    <string name="home_button">Home</string>
 </resources>

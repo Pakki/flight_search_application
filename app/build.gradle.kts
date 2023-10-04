@@ -79,4 +79,12 @@ dependencies {
     ksp(libs.androidx.room.compiler)
 
     implementation(libs.androidx.navigation.compose)
+
+
+    //test UI
+    //androidTestImplementation(platform("androidx.compose:compose-bom:2023.05.01"))
+    //androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation(libs.androidx.navigation.testing)
+    androidTestImplementation(libs.androidx.espresso.intents)
+    //androidTestImplementation(libs.androidx.test.ext.junit)
 }

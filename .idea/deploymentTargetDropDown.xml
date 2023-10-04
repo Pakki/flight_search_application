@@ -18,6 +18,9 @@
           <timeTargetWasSelectedWithDropDown value="2023-10-02T10:09:06.029771500Z" />
         </State>
       </entry>
+      <entry key="flightSearchNavHost_verifyStartDestination()">
+        <State />
+      </entry>
     </value>
   </component>
 </project>
