@@ -9,12 +9,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.flightsearchapplication.R
 import com.example.flightsearchapplication.data.Airport
+import com.example.flightsearchapplication.data.NavigationItem
 
 @Composable
 fun AirportRow(
@@ -29,8 +35,10 @@ fun AirportRow(
     Row(modifier = modifier
         .clickable {
             currentAirport.value = airport
-            navHostController.navigate(route = "Airport")
-        }) {
+            navHostController.navigate(route = NavigationItem.Airport.screen.route)
+        }
+        .testTag(stringResource(id = R.string.airport_tag))
+    ) {
         Text(
             text =
             AnnotatedString(

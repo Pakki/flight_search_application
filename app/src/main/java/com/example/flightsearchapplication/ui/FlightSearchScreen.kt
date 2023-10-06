@@ -134,7 +134,7 @@ fun FlightSearchScreen(
                 )
                 flightSearchScreenViewModel.selectNavItem(NavigationItem.Home)
             }
-            composable("Airport") {
+            composable(Screen.Airport.route) {
                 AirportScreen(paddingValues = innerPadding, currentAirport = currentAirport.value)
                 flightSearchScreenViewModel.selectNavItem(NavigationItem.Airport)
             }
@@ -161,7 +161,7 @@ fun TopAppBar(currentPage: String, navHostController: NavHostController) {
                 }) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = currentPage
+                        contentDescription = stringResource(id = R.string.back_button)
                     )
                 }
             }

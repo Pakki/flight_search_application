@@ -8,4 +8,7 @@
     <string name="back_button">Back</string>
     <string name="favorite_button">Favorite</string>
     <string name="home_button">Home</string>
+    <string name="airport_tag">Airport</string>
+
+
 </resources>

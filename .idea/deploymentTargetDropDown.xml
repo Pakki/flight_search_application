@@ -2,6 +2,9 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="FlightSearchScreenNavigationTest">
+        <State />
+      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
@@ -18,7 +21,16 @@
           <timeTargetWasSelectedWithDropDown value="2023-10-02T10:09:06.029771500Z" />
         </State>
       </entry>
+      <entry key="cupcakeNavHost_clickOneCupcake_navigatesToSelectFlavorScreen()">
+        <State />
+      </entry>
+      <entry key="flightSearchNavHost_navigatesToSelectFavoriteScreen()">
+        <State />
+      </entry>
       <entry key="flightSearchNavHost_verifyStartDestination()">
+        <State />
+      </entry>
+      <entry key="navigateToAirportScreen()">
         <State />
       </entry>
     </value>

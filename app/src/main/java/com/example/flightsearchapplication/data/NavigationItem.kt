@@ -27,7 +27,7 @@ sealed class NavigationItem(
     )
 
     object Airport: NavigationItem(
-        screen = Screen.Favorities,
+        screen = Screen.Airport,
         title = R.string.navigation_title_airport,
         icon = Icons.Outlined.ArrowBack
     )
