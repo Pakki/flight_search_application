@@ -5,7 +5,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithContentDescription
-import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
@@ -13,8 +12,6 @@ import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import com.example.flightsearchapplication.data.NavigationItem
 import com.example.flightsearchapplication.ui.FlightSearchScreen
-import junit.framework.TestCase.assertEquals
-
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -51,6 +48,7 @@ class FlightSearchScreenNavigationTest {
     fun flightSearchNavHost_navigatesToSelectFavoriteScreen() {
         navigateToFavoriteScreen()
     }
+
     @Test
     fun flightSearchNavHost_navigatesToSelectFavoriteScreenAndReturnBack() {
         navigateToFavoriteScreen()
@@ -59,7 +57,7 @@ class FlightSearchScreenNavigationTest {
     }
 
     @Test
-    fun navigateToAirportScreen(){
+    fun navigateToAirportScreen() {
         composeTestRule
             .onNodeWithContentDescription(label = composeTestRule.activity.getString(R.string.search_field_clear_button))
             .performClick()
@@ -76,7 +74,7 @@ class FlightSearchScreenNavigationTest {
         composeTestRule.onNodeWithContentDescription(backText).performClick()
     }
 
-    private fun navigateToFavoriteScreen(){
+    private fun navigateToFavoriteScreen() {
         composeTestRule.onNodeWithStringId(R.string.navigation_title_favority)
             .performClick()
         navController.assertCurrentRouteName(NavigationItem.Favorite.screen.route)

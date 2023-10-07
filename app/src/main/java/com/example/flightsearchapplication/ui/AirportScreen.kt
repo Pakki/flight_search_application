@@ -20,12 +20,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.flightsearchapplication.R
 import com.example.flightsearchapplication.data.Airport
 import com.example.flightsearchapplication.ui.theme.FlightSearchApplicationTheme
-import com.example.flightsearchapplication.R
 import kotlinx.coroutines.launch
 
 
@@ -75,7 +77,10 @@ fun AirportScreen(
                             } else {
                                 Icons.Outlined.FavoriteBorder
                             },
-                            contentDescription = stringResource(id = R.string.favorite_button)
+                            contentDescription = stringResource(id = R.string.favorite_button),
+                            modifier = Modifier.semantics {
+                                testTag = if (airport.isFavorite) "Favorite" else "NonFavorite"
+                            }
                         )
                     }
                     Spacer(modifier = Modifier.width(5.dp))
@@ -89,7 +94,7 @@ fun AirportScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun AirportScreenPreview(){
+fun AirportScreenPreview() {
     FlightSearchApplicationTheme {
         AirportScreen(
             currentAirport = Airport(

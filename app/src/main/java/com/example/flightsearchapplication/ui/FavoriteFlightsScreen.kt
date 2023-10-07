@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -29,10 +28,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flightsearchapplication.R
 
+
 @Composable
 fun FavoriteScreen(
     paddingValues: PaddingValues,
-    modifier: Modifier = Modifier){
+    modifier: Modifier = Modifier
+) {
 
     val favoriteFlightsScreenViewModel: FavoriteFlightsScreenViewModel = viewModel(
         factory = FavoriteFlightsScreenViewModel.Factory
@@ -62,7 +63,8 @@ fun FavoriteScreen(
                                 airport.departureCode,
                                 airport.destinationCode
                             )
-                        }) {
+                        }
+                        ) {
                             Icon(
                                 imageVector = Icons.Outlined.Favorite,
                                 contentDescription = stringResource(id = R.string.favorite_button)

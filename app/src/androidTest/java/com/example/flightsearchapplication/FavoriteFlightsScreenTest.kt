@@ -1,8 +1,9 @@
 package com.example.flightsearchapplication
 
-import android.util.Log
 import androidx.activity.ComponentActivity
-import androidx.compose.ui.test.captureToImage
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.SemanticsProperties.TestTag
+import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onAllNodesWithTag
@@ -10,12 +11,14 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
-import androidx.compose.ui.test.printToLog
+import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import com.example.flightsearchapplication.data.NavigationItem
+import com.example.flightsearchapplication.ui.FlightSearchScreen
+import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import com.example.flightsearchapplication.R
 
 class FavoriteFlightsScreenTest {
 
@@ -24,12 +27,19 @@ class FavoriteFlightsScreenTest {
 
     private lateinit var navController: TestNavHostController
 
-    @Test
-    fun makeFlightFavorite(){
 
+    @Before
+    fun setupCupcakeNavHost() {
+        composeTestRule.setContent {
+            navController = TestNavHostController(LocalContext.current).apply {
+                navigatorProvider.addNavigator(ComposeNavigator())
+            }
+            FlightSearchScreen(navHostController = navController)
+        }
     }
+
     @Test
-    fun navigateToAirportScreen(){
+    fun makeFlightFavoriteTest() {
         composeTestRule
             .onNodeWithContentDescription(label = composeTestRule.activity.getString(R.string.search_field_clear_button))
             .performClick()
@@ -41,15 +51,20 @@ class FavoriteFlightsScreenTest {
         navController.assertCurrentRouteName(NavigationItem.Airport.screen.route)
 
         //
-        var favoriteButton = composeTestRule
-            .onAllNodesWithContentDescription(label = composeTestRule.activity.getString(R.string.favorite_button))[0]
+        val favoriteButton = composeTestRule
+            .onAllNodesWithContentDescription(
+                label = composeTestRule.activity.getString(R.string.favorite_button),
+                useUnmergedTree = true
+            )[0]
         favoriteButton.assertExists()
-        Log.d("FavoriteButton", favoriteButton.toString())
-        favoriteButton.printToLog("FavoriteButton")
+        var testTagValue = favoriteButton.fetchSemanticsNode().config.getOrNull(key = TestTag)
+        val expectedTestTagValue: String = if (testTagValue == "NonFavorite") {
+            "Favorite"
+        } else {
+            "NonFavorite"
+        }
         favoriteButton.performClick()
-        favoriteButton.printToLog("FavoriteButton after click")
-
+        testTagValue = favoriteButton.fetchSemanticsNode().config.getOrNull(key = TestTag)
+        assertEquals(testTagValue, expectedTestTagValue)
     }
-
-
 }
