@@ -14,6 +14,7 @@ import androidx.compose.ui.test.performTextInput
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import com.example.flightsearchapplication.data.NavigationItem
+import com.example.flightsearchapplication.navigation.assertCurrentRouteName
 import com.example.flightsearchapplication.ui.FlightSearchScreen
 import org.junit.Assert.assertEquals
 import org.junit.Before

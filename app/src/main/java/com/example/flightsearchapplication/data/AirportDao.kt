@@ -12,4 +12,7 @@ interface AirportDao {
     @Query("select * from airport where iata_code like :searchPhrase or name like :searchPhrase")
     fun getAirportsLike(searchPhrase: String): Flow<List<Airport>>
 
+    @Insert
+    fun insert(airport: Airport)
+
 }

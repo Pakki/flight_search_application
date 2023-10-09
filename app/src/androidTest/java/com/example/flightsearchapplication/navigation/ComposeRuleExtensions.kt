@@ -1,4 +1,4 @@
-package com.example.flightsearchapplication
+package com.example.flightsearchapplication.navigation
 
 import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes

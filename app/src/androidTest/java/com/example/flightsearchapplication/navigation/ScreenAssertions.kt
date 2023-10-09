@@ -1,4 +1,4 @@
-package com.example.flightsearchapplication
+package com.example.flightsearchapplication.navigation
 
 import androidx.navigation.NavController
 import org.junit.Assert

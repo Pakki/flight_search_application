@@ -1,4 +1,4 @@
-package com.example.flightsearchapplication
+package com.example.flightsearchapplication.navigation
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.platform.LocalContext
@@ -10,6 +10,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
+import com.example.flightsearchapplication.R
 import com.example.flightsearchapplication.data.NavigationItem
 import com.example.flightsearchapplication.ui.FlightSearchScreen
 import org.junit.Before
