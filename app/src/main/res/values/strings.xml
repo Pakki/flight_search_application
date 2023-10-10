@@ -9,5 +9,6 @@
     <string name="favorite_button">Favorite</string>
     <string name="home_button">Home</string>
     <string name="airport_tag">Airport</string>
-
+    <string name="text_from">From:</string>
+    <string name="text_to">To:</string>
 </resources>

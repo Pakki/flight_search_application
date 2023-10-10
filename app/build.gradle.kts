@@ -88,4 +88,7 @@ dependencies {
     androidTestImplementation(libs.androidx.navigation.testing)
     androidTestImplementation(libs.androidx.espresso.intents)
     //androidTestImplementation(libs.androidx.test.ext.junit)
+
+    //test datastore
+    testImplementation(libs.kotlinx.coroutines.test)
 }

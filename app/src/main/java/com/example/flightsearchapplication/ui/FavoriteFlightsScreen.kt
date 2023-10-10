@@ -50,7 +50,7 @@ fun FavoriteScreen(
             border = BorderStroke(2.dp, color = MaterialTheme.colorScheme.primary)
         ) {
             LazyColumn(
-                modifier = Modifier.padding(paddingValues)
+
             ) {
                 items(
                     items = favoriteAirports,

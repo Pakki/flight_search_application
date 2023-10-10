@@ -2,10 +2,35 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="app">
+      <entry key="FlightSearchScreenViewModelTest">
         <State />
       </entry>
-      <entry key="readAirportsInList()">
+      <entry key="app">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\snow\.android\avd\Resizable_Experimental_API_34.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2023-10-10T11:07:37.334348Z" />
+        </State>
+      </entry>
+      <entry key="getAirportsLikeTest()">
+        <State />
+      </entry>
+      <entry key="makeFlightFavoriteTest() (1)">
+        <State />
+      </entry>
+      <entry key="readAirportsTest()">
+        <State />
+      </entry>
+      <entry key="repositorySaveSearchPhraseTest()">
         <State />
       </entry>
     </value>
