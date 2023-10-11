@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -18,6 +19,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
 import com.example.flightsearchapplication.R
 import com.example.flightsearchapplication.data.Airport
 import com.example.flightsearchapplication.data.NavigationItem
@@ -56,7 +58,8 @@ fun AirportRow(
             ),
             modifier = Modifier
                 .padding(5.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .align(alignment = Alignment.CenterVertically),
         )
     }
 }

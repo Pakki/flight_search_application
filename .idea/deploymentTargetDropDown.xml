@@ -2,7 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="FlightSearchScreenViewModelTest">
+      <entry key="Tests in 'com.example.flightsearchapplication'">
         <State />
       </entry>
       <entry key="app">
@@ -21,16 +21,7 @@
           <timeTargetWasSelectedWithDropDown value="2023-10-10T11:07:37.334348Z" />
         </State>
       </entry>
-      <entry key="getAirportsLikeTest()">
-        <State />
-      </entry>
-      <entry key="makeFlightFavoriteTest() (1)">
-        <State />
-      </entry>
-      <entry key="readAirportsTest()">
-        <State />
-      </entry>
-      <entry key="repositorySaveSearchPhraseTest()">
+      <entry key="readAirportsInList()">
         <State />
       </entry>
     </value>

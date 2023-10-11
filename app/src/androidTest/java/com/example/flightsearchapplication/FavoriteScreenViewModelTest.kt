@@ -13,10 +13,10 @@ import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class FavoriteScreenViewModelTest: FlightSearchScreenViewModelTest() {
-    lateinit var favoriteFlightsScreenViewModel: FavoriteFlightsScreenViewModel
-    lateinit var favoriteAirportDao: FavoriteAirportDao
-    lateinit var airportFavoriteDao: AirportFavoriteDao
-    lateinit var airportScreenViewModel: AirportScreenViewModel
+    private lateinit var favoriteFlightsScreenViewModel: FavoriteFlightsScreenViewModel
+    private lateinit var favoriteAirportDao: FavoriteAirportDao
+    private lateinit var airportFavoriteDao: AirportFavoriteDao
+    private lateinit var airportScreenViewModel: AirportScreenViewModel
     override fun createDb(){
         super.createDb()
         favoriteAirportDao = db.favoriteAirportDao()

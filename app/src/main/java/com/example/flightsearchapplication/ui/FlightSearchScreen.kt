@@ -83,7 +83,6 @@ fun FlightSearchScreen(
                 navHostController = navHostController
             )
         },
-
         bottomBar = {
             NavigationBar(modifier = modifier) {
                 val items = listOf(
@@ -99,7 +98,7 @@ fun FlightSearchScreen(
                                     saveState = true
                                 }
                                 launchSingleTop = true
-                                restoreState = true
+                                //restoreState = true
                             }
                         },
                         icon = {
@@ -237,7 +236,6 @@ fun FlightsSearchField(
                 TextFieldDefaults.colors(
                     focusedContainerColor = MaterialTheme.colorScheme.background,
                     unfocusedContainerColor = MaterialTheme.colorScheme.background,
-
                     ),
             )
         }

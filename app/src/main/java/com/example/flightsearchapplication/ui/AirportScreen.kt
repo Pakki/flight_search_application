@@ -30,6 +30,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -125,7 +126,11 @@ fun AirportScreen(
                                 )
                             }
                             Spacer(modifier = Modifier.width(5.dp))
-                            Text(text = "${airport.iataCode} ${airport.name}")
+                            Text(text = "${airport.iataCode} ${airport.name}",
+                                modifier = Modifier
+                                    .padding(5.dp)
+                                    .fillMaxWidth()
+                                    .align(alignment = Alignment.CenterVertically))
                         }
                         Divider(color = MaterialTheme.colorScheme.onBackground, thickness = 2.dp)
                     }
