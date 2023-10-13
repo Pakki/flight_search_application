@@ -1,8 +1,5 @@
 package com.example.flightsearchapplication.ui
 
-import android.graphics.drawable.shapes.RoundRectShape
-import android.graphics.drawable.shapes.Shape
-import android.view.RoundedCorner
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,14 +22,12 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
@@ -126,11 +121,13 @@ fun AirportScreen(
                                 )
                             }
                             Spacer(modifier = Modifier.width(5.dp))
-                            Text(text = "${airport.iataCode} ${airport.name}",
+                            Text(
+                                text = "${airport.iataCode} ${airport.name}",
                                 modifier = Modifier
                                     .padding(5.dp)
                                     .fillMaxWidth()
-                                    .align(alignment = Alignment.CenterVertically))
+                                    .align(alignment = Alignment.CenterVertically)
+                            )
                         }
                         Divider(color = MaterialTheme.colorScheme.onBackground, thickness = 2.dp)
                     }

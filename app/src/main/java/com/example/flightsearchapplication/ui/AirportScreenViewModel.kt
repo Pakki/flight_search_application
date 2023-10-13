@@ -2,24 +2,20 @@ package com.example.flightsearchapplication.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.flightsearchapplication.FlightSearchApplication
-import com.example.flightsearchapplication.data.Airport
-import com.example.flightsearchapplication.data.AirportDao
 import com.example.flightsearchapplication.data.AirportFavorite
 import com.example.flightsearchapplication.data.AirportFavoriteDao
 import com.example.flightsearchapplication.data.Favorite
 import com.example.flightsearchapplication.data.FavoriteDao
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 
 class AirportScreenViewModel(
 
     private val favoriteDao: FavoriteDao,
     private val airportFavoriteDao: AirportFavoriteDao
-    ) : ViewModel() {
+) : ViewModel() {
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
@@ -27,7 +23,6 @@ class AirportScreenViewModel(
                 val application =
                     (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as FlightSearchApplication)
                 AirportScreenViewModel(
-
                     application.database.favoriteDao(),
                     application.database.airportFavoriteDao()
                 )
@@ -41,18 +36,16 @@ class AirportScreenViewModel(
     suspend fun addFavorite(
         departureCode: String,
         destinationCode: String
-    ){
-
-            favoriteDao.insert(
-                Favorite(
-                    departureCode = departureCode,
-                    destinationCode = destinationCode
-                )
+    ) {
+        favoriteDao.insert(
+            Favorite(
+                departureCode = departureCode,
+                destinationCode = destinationCode
             )
-
+        )
     }
 
-    suspend fun deleteFavorite(favoriteId: Int, departureCode: String, destinationCode: String){
+    suspend fun deleteFavorite(favoriteId: Int, departureCode: String, destinationCode: String) {
         favoriteDao.delete(
             Favorite(
                 id = favoriteId,
