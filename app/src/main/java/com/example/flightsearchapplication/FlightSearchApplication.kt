@@ -19,6 +19,5 @@ class FlightSearchApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         userInputRepository = UserInputRepository(dataStore)
-
     }
 }
