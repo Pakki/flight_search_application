@@ -3,10 +3,8 @@ package com.example.flightsearchapplication.navigation
 sealed class Screen(
     val route: String
 ) {
-
     object Home: Screen(HOME)
     object Favorities: Screen(FAVORITIES)
-
     object Airport: Screen(AIRPORT)
 
     private companion object{
